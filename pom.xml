@@ -16,6 +16,28 @@
         <testng.version>7.10.2</testng.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>central-http</id>
+            <name>Maven Central HTTP Fallback</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central-plugins-http</id>
+            <name>Maven Central Plugins HTTP Fallback</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
