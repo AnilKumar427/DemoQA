@@ -1,0 +1,53 @@
+package com.demoqa.pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
+public class ButtonsPage extends BasePage {
+    private Actions actions;
+    private WebDriverWait wait;
+
+    @FindBy(id = "doubleClickBtn") private WebElement doubleClickBtn;
+    @FindBy(id = "rightClickBtn") private WebElement rightClickBtn;
+    @FindBy(xpath = "//button[text()='Click Me']") private WebElement dynamicClickBtn;
+
+    @FindBy(id = "doubleClickMessage") private WebElement doubleMessage;
+    @FindBy(id = "rightClickMessage") private WebElement rightMessage;
+    @FindBy(id = "dynamicClickMessage") private WebElement dynamicMessage;
+
+    public ButtonsPage(WebDriver driver) {
+        super(driver);
+        this.actions = new Actions(driver);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    }
+
+    public void triggerDoubleClick() {
+        actions.doubleClick(doubleClickBtn).perform();
+    }
+
+    public void triggerRightClick() {
+        actions.contextClick(rightClickBtn).perform();
+    }
+
+    public void triggerDynamicClick() {
+        scrollCenterAndClick(dynamicClickBtn);
+    }
+
+    // Explicitly wait for dynamic text messages to materialize in the DOM before reading text
+    public String getDoubleClickMessage() {
+        return wait.until(ExpectedConditions.visibilityOf(doubleMessage)).getText();
+    }
+
+    public String getRightClickMessage() {
+        return wait.until(ExpectedConditions.visibilityOf(rightMessage)).getText();
+    }
+
+    public String getDynamicClickMessage() {
+        return wait.until(ExpectedConditions.visibilityOf(dynamicMessage)).getText();
+    }
+}
