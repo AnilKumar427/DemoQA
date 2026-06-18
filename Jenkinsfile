@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3'   // Name from Jenkins config
+        maven 'Maven3'
         jdk 'JDK11'
     }
 
@@ -10,20 +10,14 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo.git'
+                git 'https://github.com/AnilKumar427/DemoQA.git'
             }
         }
 
         stage('Build & Test') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
-        }
-    }
-
-    post {
-        always {
-            junit 'target/surefire-reports/*.xml'
         }
     }
 }
