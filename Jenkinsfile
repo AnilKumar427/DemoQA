@@ -8,16 +8,14 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Debug') {
             steps {
-                echo 'Cloning repository...'
-                git 'https://github.com/AnilKumar427/DemoQA.git'
+                echo '✅ Pipeline is executing correctly'
             }
         }
 
-        stage('Build & Test') {
+        stage('Build') {
             steps {
-                echo 'Running Maven build...'
                 bat 'mvn clean test'
             }
         }
@@ -25,10 +23,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Build SUCCESS'
+            echo '✅ BUILD SUCCESS'
         }
         failure {
-            echo '❌ Build FAILED'
+            echo '❌ BUILD FAILED'
         }
     }
 }
