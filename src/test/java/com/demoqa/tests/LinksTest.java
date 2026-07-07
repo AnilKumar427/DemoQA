@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 
 public class LinksTest extends BaseTest {
     @Test
-    public void testWindowNavigationAndMockApiLinks() {
+    public void testWindowNavigationAndMockApiLinks()
+    {
         driver.get(ConfigReader.getProperty("baseUrl") + "/links");
         LinksPage linksPage = new LinksPage(driver);
 

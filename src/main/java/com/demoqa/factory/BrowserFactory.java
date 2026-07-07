@@ -15,15 +15,16 @@ public class BrowserFactory {
         WebDriver driver;
 
         // 1. Fetch the headless setting from config.properties dynamically
-        // (Defaults to false if the key is missing or blank)
-        // Example if your class is named differently:
-        String headlessProp = ConfigReader.getProperty("headless");   boolean isHeadless = headlessProp != null && headlessProp.equalsIgnoreCase("true");
+        String headlessProp = ConfigReader.getProperty("headless");
+        boolean isHeadless = headlessProp != null && headlessProp.equalsIgnoreCase("true");
 
-        switch (browser.toLowerCase().trim()) {
+        switch (browser.toLowerCase().trim())
+        {
             case "chrome":
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--remote-allow-origins=*");
-                if (isHeadless) {
+                if (isHeadless)
+                {
                     chromeOptions.addArguments("--headless=new"); // Modern headless argument
                     chromeOptions.addArguments("--window-size=1920,1080"); // Fixes element sizing issues in headless
                 }
@@ -33,7 +34,8 @@ public class BrowserFactory {
             case "edge":
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-allow-origins=*");
-                if (isHeadless) {
+                if (isHeadless)
+                {
                     edgeOptions.addArguments("--headless=new");
                     edgeOptions.addArguments("--window-size=1920,1080");
                 }
@@ -43,14 +45,15 @@ public class BrowserFactory {
             case "firefox":
             case "ff":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
-                if (isHeadless) {
+                if (isHeadless)
+                {
                     firefoxOptions.addArguments("-headless"); // Firefox uses a single hyphen flag
                 }
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
 
             default:
-                throw new IllegalArgumentException("❌ Unsupported browser: " + browser);
+                throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
 
         return driver;

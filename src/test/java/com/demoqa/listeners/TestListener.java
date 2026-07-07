@@ -18,12 +18,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TestListener implements ITestListener {
+public class TestListener implements ITestListener
+{
     private static ExtentReports extent;
     private static ThreadLocal<ExtentTest> testThread = new ThreadLocal<>();
 
     @Override
-    public void onStart(ITestContext context) {
+    public void onStart(ITestContext context)
+    {
         String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         String reportPath = System.getProperty("user.dir") + "/reports/ExtentReport_" + timestamp + ".html";
 
@@ -38,28 +40,33 @@ public class TestListener implements ITestListener {
     }
 
     @Override
-    public void onTestStart(ITestResult result) {
+    public void onTestStart(ITestResult result)
+    {
         ExtentTest test = extent.createTest(result.getMethod().getMethodName());
         testThread.set(test);
     }
 
     @Override
-    public void onTestSuccess(ITestResult result) {
+    public void onTestSuccess(ITestResult result)
+    {
         testThread.get().log(Status.PASS, "Test Executed and Passed Successfully.");
     }
 
     @Override
-    public void onTestFailure(ITestResult result) {
+    public void onTestFailure(ITestResult result)
+    {
         testThread.get().log(Status.FAIL, "Test Execution Encountered a Fault: " + result.getThrowable());
 
         // FIX 2: Safe fetching of the running test case object instance
         Object currentClass = result.getInstance();
 
         // FIX 3: Cast to BaseTest to fetch the active Webdriver reference cleanly
-        if (currentClass instanceof BaseTest) {
+        if (currentClass instanceof BaseTest)
+        {
             WebDriver driver = ((BaseTest) currentClass).getDriver();
 
-            if (driver != null) {
+            if (driver != null)
+            {
                 String screenshotPath = takeScreenshot(driver, result.getMethod().getMethodName());
                 // FIX 4: Correct v5 syntax for binding the captured screenshot string path to the log thread
                 testThread.get().addScreenCaptureFromPath(screenshotPath);
@@ -68,26 +75,32 @@ public class TestListener implements ITestListener {
     }
 
     @Override
-    public void onTestSkipped(ITestResult result) {
+    public void onTestSkipped(ITestResult result)
+    {
         testThread.get().log(Status.SKIP, "Test Execution was Skipped.");
     }
 
     @Override
-    public void onFinish(ITestContext context) {
+    public void onFinish(ITestContext context)
+    {
         if (extent != null) {
             extent.flush();
         }
     }
 
-    private String takeScreenshot(WebDriver driver, String methodName) {
+    private String takeScreenshot(WebDriver driver, String methodName)
+    {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String destPath = System.getProperty("user.dir") + "/screenshots/" + methodName + "_" + timestamp + ".png";
 
         // FIX 5: Explicitly type-cast the active web driver to the screen-capture engine
         File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
+        try
+        {
             FileUtils.copyFile(srcFile, new File(destPath));
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             System.out.println("Exception captured while taking framework screenshot: " + e.getMessage());
         }
         return destPath;

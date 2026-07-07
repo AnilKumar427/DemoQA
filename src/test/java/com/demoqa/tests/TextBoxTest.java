@@ -5,9 +5,11 @@ import com.demoqa.utils.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TextBoxTest extends BaseTest {
+public class TextBoxTest extends BaseTest
+{
     @Test
-    public void testTextBoxSubmission() {
+    public void testTextBoxSubmission()
+    {
         driver.get(ConfigReader.getProperty("baseUrl") + "/text-box");
         TextBoxPage textBoxPage = new TextBoxPage(driver);
         textBoxPage.fillForm("Albert Einstein", "albert001@gmail.com",

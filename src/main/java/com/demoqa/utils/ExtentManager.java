@@ -7,8 +7,10 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 public class ExtentManager {
     private static ExtentReports extent;
 
-    public static ExtentReports getInstance() {
-        if (extent == null) {
+    public static ExtentReports getInstance()
+    {
+        if (extent == null)
+        {
             // Define where the report will be saved
             String reportPath = System.getProperty("user.dir") + "/test-output/ExtentReport.html";
             ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);

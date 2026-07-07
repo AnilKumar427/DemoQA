@@ -4,10 +4,12 @@ import com.demoqa.pages.ButtonsPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ButtonsTest extends BaseTest {
+public class ButtonsTest extends BaseTest
+{
 
     @Test
-    public void testAdvancedInteractions() throws InterruptedException {
+    public void testAdvancedInteractions() throws InterruptedException
+    {
         driver.get("https://demoqa.com/buttons");
         ButtonsPage buttonsPage = new ButtonsPage(driver);
 

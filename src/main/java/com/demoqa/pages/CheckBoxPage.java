@@ -19,45 +19,62 @@ public class CheckBoxPage {
     }
 
     public void executeTreeFlow() throws InterruptedException {
-        // Expand Root Home folder
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(@class,'rc-tree-switcher')]"))).click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Expand Root Home folder using JS click
+        WebElement rootSwitcher = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(@class,'rc-tree-switcher')]")));
+        js.executeScript("arguments[0].click();", rootSwitcher);
 
         // Get immediate children under home (Desktop, Documents, Downloads)
         List<WebElement> homeBoxes = driver.findElements(By.xpath("//*[@class='rc-tree-switcher rc-tree-switcher_close']"));
 
-        // 1. Expand Desktop folder
-        homeBoxes.get(0).click();
+        // 1. Expand Desktop folder using JS
+        js.executeScript("arguments[0].click();", homeBoxes.get(0));
 
-        // Wait for elements to step out of hidden CSS state and click them
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[aria-label='Select Notes']"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[aria-label='Select Commands']"))).click();
+        // Use JS clicks for checkboxes
+        WebElement notesCb = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[aria-label='Select Notes']")));
+        js.executeScript("arguments[0].click();", notesCb);
 
-        // 2. Expand Documents folder
-        homeBoxes.get(1).click();
+        // Scroll commands check box into view just in case
+        WebElement commandsCb = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[aria-label='Select Commands']")));
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", commandsCb);
+        js.executeScript("arguments[0].click();", commandsCb);
+
+        // 2. Expand Documents folder using JS
+        js.executeScript("arguments[0].click();", homeBoxes.get(1));
 
         // Target document sub-folders
         List<WebElement> docBoxes = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(
                 By.xpath("//span[contains(@class,'rc-tree-switcher rc-tree-switcher_close')]"), 1));
 
-        // Expand Workspace folder
-        docBoxes.get(0).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[aria-label='Select Angular']"))).click();
+        // Expand Workspace folder using JS (Fixes line 54 error)
+        js.executeScript("arguments[0].click();", docBoxes.get(0));
 
-        // Expand Office folder
-        docBoxes.get(1).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[aria-label='Select Public']"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[aria-label='Select Private']"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[aria-label='Select General']"))).click();
+        WebElement angularCb = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[aria-label='Select Angular']")));
+        js.executeScript("arguments[0].click();", angularCb);
+
+        // Expand Office folder using JS
+        js.executeScript("arguments[0].click();", docBoxes.get(1));
+
+        WebElement publicCb = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[aria-label='Select Public']")));
+        js.executeScript("arguments[0].click();", publicCb);
+
+        WebElement privateCb = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[aria-label='Select Private']")));
+        js.executeScript("arguments[0].click();", privateCb);
+
+        WebElement generalCb = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[aria-label='Select General']")));
+        js.executeScript("arguments[0].click();", generalCb);
 
         // 3. Handle Downloads expansion cleanly
         WebElement downloadToggle = driver.findElement(
                 By.xpath("//span[@aria-label='Select Downloads']/preceding-sibling::span[1]"));
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", downloadToggle);
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", downloadToggle);
         Thread.sleep(500);
-        downloadToggle.click();
+        js.executeScript("arguments[0].click();", downloadToggle);
 
-        // Click final Word Doc target
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[aria-label='Select Word File.doc']"))).click();
+        // Click final Word Doc target using JS
+        WebElement wordFileCb = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[aria-label='Select Word File.doc']")));
+        js.executeScript("arguments[0].click();", wordFileCb);
     }
 }

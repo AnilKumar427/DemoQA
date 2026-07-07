@@ -5,9 +5,11 @@ import com.demoqa.utils.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class RadioButtonTest extends BaseTest {
+public class RadioButtonTest extends BaseTest
+{
     @Test
-    public void testRadioSelections() {
+    public void testRadioSelections()
+    {
         driver.get(ConfigReader.getProperty("baseUrl") + "/radio-button");
         RadioButtonPage radioPage = new RadioButtonPage(driver);
 

@@ -6,9 +6,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.io.File;
 
-public class UploadDownloadTest extends BaseTest {
+public class UploadDownloadTest extends BaseTest
+{
     @Test
-    public void testFileTransferModules() throws Exception {
+    public void testFileTransferModules() throws Exception
+    {
         driver.get(ConfigReader.getProperty("baseUrl") + "/upload-download");
         UploadDownloadPage page = new UploadDownloadPage(driver);
 

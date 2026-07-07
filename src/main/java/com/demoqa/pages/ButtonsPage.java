@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-public class ButtonsPage extends BasePage {
+public class ButtonsPage extends BasePage
+{
     private Actions actions;
     private WebDriverWait wait;
 
@@ -20,34 +21,41 @@ public class ButtonsPage extends BasePage {
     @FindBy(id = "rightClickMessage") private WebElement rightMessage;
     @FindBy(id = "dynamicClickMessage") private WebElement dynamicMessage;
 
-    public ButtonsPage(WebDriver driver) {
+    public ButtonsPage(WebDriver driver)
+    {
         super(driver);
         this.actions = new Actions(driver);
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
-    public void triggerDoubleClick() {
+    public void triggerDoubleClick()
+    {
         actions.doubleClick(doubleClickBtn).perform();
     }
 
-    public void triggerRightClick() {
+    public void triggerRightClick()
+    {
         actions.contextClick(rightClickBtn).perform();
     }
 
-    public void triggerDynamicClick() {
+    public void triggerDynamicClick()
+    {
         scrollCenterAndClick(dynamicClickBtn);
     }
 
     // Explicitly wait for dynamic text messages to materialize in the DOM before reading text
-    public String getDoubleClickMessage() {
+    public String getDoubleClickMessage()
+    {
         return wait.until(ExpectedConditions.visibilityOf(doubleMessage)).getText();
     }
 
-    public String getRightClickMessage() {
+    public String getRightClickMessage()
+    {
         return wait.until(ExpectedConditions.visibilityOf(rightMessage)).getText();
     }
 
-    public String getDynamicClickMessage() {
+    public String getDynamicClickMessage()
+    {
         return wait.until(ExpectedConditions.visibilityOf(dynamicMessage)).getText();
     }
 }

@@ -5,10 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-public class BrokenTest extends BaseTest {
+public class BrokenTest extends BaseTest
+{
 
     @Test
-    public void testAssetsAndHyperlinks() {
+    public void testAssetsAndHyperlinks()
+    {
         driver.get("https://demoqa.com/broken");
         BrokenLinksPage brokenPage = new BrokenLinksPage(driver);
 

@@ -5,9 +5,11 @@ import com.demoqa.utils.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DynamicPropsTest extends BaseTest {
+public class DynamicPropsTest extends BaseTest
+{
     @Test
-    public void testDynamicDelays() {
+    public void testDynamicDelays()
+    {
         driver.get(ConfigReader.getProperty("baseUrl") + "/dynamic-properties");
         DynamicPropertiesPage dynamicPage = new DynamicPropertiesPage(driver);
 
