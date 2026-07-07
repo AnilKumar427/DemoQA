@@ -8,16 +8,25 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Debug') {
             steps {
-                git 'https://github.com/AnilKumar427/DemoQA.git'
+                echo '✅ Pipeline is executing correctly'
             }
         }
 
-        stage('Build & Test') {
+        stage('Build') {
             steps {
                 bat 'mvn clean test'
             }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ BUILD SUCCESS'
+        }
+        failure {
+            echo '❌ BUILD FAILED'
         }
     }
 }
