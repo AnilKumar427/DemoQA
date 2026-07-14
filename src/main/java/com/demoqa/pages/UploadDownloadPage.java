@@ -9,8 +9,10 @@ public class UploadDownloadPage extends BasePage
 
     @FindBy(id = "downloadButton")
     private WebElement downloadBtn;
+
     @FindBy(id = "uploadFile")
     private WebElement uploadInputHidden;
+
     @FindBy(id = "uploadedFilePath")
     private WebElement confirmationLabel;
 

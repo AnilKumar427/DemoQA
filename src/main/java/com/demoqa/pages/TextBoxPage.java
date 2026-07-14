@@ -9,14 +9,19 @@ public class TextBoxPage extends BasePage
 
     @FindBy(id = "userName")
     private WebElement userNameInput;
+
     @FindBy(id = "userEmail")
     private WebElement userEmailInput;
+
     @FindBy(id = "currentAddress")
     private WebElement currentAddressInput;
+
     @FindBy(id = "permanentAddress")
     private WebElement permanentAddressInput;
+
     @FindBy(id = "submit")
     private WebElement submitBtn;
+
     @FindBy(id = "output")
     private WebElement outputArea;
 

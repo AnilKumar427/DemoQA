@@ -9,10 +9,13 @@ public class RadioButtonPage extends BasePage
 
     @FindBy(css = "label[for='yesRadio']")
     private WebElement yesRadioLabel;
+
     @FindBy(css = "label[for='impressiveRadio']")
     private WebElement impressiveRadioLabel;
+
     @FindBy(id = "noRadio")
     private WebElement noRadioInput;
+
     @FindBy(css = "p.mt-3")
     private WebElement successText;
 
@@ -25,14 +28,17 @@ public class RadioButtonPage extends BasePage
     {
         yesRadioLabel.click();
     }
+
     public void clickImpressiveRadio()
     {
         impressiveRadioLabel.click();
     }
+
     public boolean isNoRadioDisabled()
     {
         return !noRadioInput.isEnabled();
     }
+
     public String getConfirmationText()
     {
         return successText.getText();

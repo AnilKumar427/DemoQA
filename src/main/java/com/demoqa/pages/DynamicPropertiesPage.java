@@ -10,8 +10,10 @@ public class DynamicPropertiesPage extends BasePage
 
     @FindBy(id = "enableAfter")
     private WebElement interactiveDelayedBtn;
+
     @FindBy(id = "colorChange")
     private WebElement textDangerColorBtn;
+
     @FindBy(id = "visibleAfter")
     private WebElement visibleDelayedBtn;
 

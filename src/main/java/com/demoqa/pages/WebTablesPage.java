@@ -11,20 +11,28 @@ public class WebTablesPage extends BasePage
 
     @FindBy(id = "addNewRecordButton")
     private WebElement addBtn;
+
     @FindBy(id = "firstName")
     private WebElement fName;
+
     @FindBy(id = "lastName")
     private WebElement lName;
+
     @FindBy(id = "userEmail")
     private WebElement email;
+
     @FindBy(id = "age")
     private WebElement userAge;
+
     @FindBy(id = "salary")
     private WebElement userSalary;
+
     @FindBy(id = "department")
     private WebElement dept;
+
     @FindBy(id = "submit")
     private WebElement submitBtn;
+
     @FindBy(id = "searchBox")
     private WebElement searchInput;
 

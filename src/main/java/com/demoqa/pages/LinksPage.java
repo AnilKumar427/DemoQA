@@ -11,20 +11,28 @@ public class LinksPage extends BasePage
 
     @FindBy(id = "simpleLink")
     private WebElement simpleTabLink;
+
     @FindBy(id = "linkResponse")
     private WebElement linkResponsePanel;
+
     @FindBy(id = "created")
     private WebElement createdLink;
+
     @FindBy(id = "no-content")
     private WebElement noContentLink;
+
     @FindBy(id = "moved")
     private WebElement movedLink;
+
     @FindBy(id = "bad-request")
     private WebElement badRequestLink;
+
     @FindBy(id = "unauthorized")
     private WebElement unauthorizedLink;
+
     @FindBy(id = "forbidden")
     private WebElement forbiddenLink;
+
     @FindBy(id = "invalid-url")
     private WebElement notFoundLink;
 

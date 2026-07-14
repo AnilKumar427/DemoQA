@@ -17,7 +17,8 @@ public class ButtonsPage extends BasePage
     @FindBy(id = "rightClickBtn") private WebElement rightClickBtn;
     @FindBy(xpath = "//button[text()='Click Me']") private WebElement dynamicClickBtn;
 
-    @FindBy(id = "doubleClickMessage") private WebElement doubleMessage;
+    @FindBy(id = "doubleClickMessage")
+    private WebElement doubleMessage;
     @FindBy(id = "rightClickMessage") private WebElement rightMessage;
     @FindBy(id = "dynamicClickMessage") private WebElement dynamicMessage;
 

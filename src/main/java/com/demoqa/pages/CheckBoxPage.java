@@ -9,16 +9,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class CheckBoxPage {
+public class CheckBoxPage
+{
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public CheckBoxPage(WebDriver driver) {
+    public CheckBoxPage(WebDriver driver)
+    {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
-    public void executeTreeFlow() throws InterruptedException {
+    public void executeTreeFlow() throws InterruptedException
+    {
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         // Expand Root Home folder using JS click
@@ -76,5 +79,6 @@ public class CheckBoxPage {
         // Click final Word Doc target using JS
         WebElement wordFileCb = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span[aria-label='Select Word File.doc']")));
         js.executeScript("arguments[0].click();", wordFileCb);
+
     }
 }

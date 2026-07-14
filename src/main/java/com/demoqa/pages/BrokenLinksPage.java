@@ -10,10 +10,14 @@ import java.net.URL;
 public class BrokenLinksPage extends BasePage
 {
 
-    @FindBy(xpath = "//img[@src='/images/Toolsqa.jpg']") private WebElement standardImage;
-    @FindBy(xpath = "//img[@src='/images/Toolsqa_1.jpg']") private WebElement brokenImageElement;
-    @FindBy(linkText = "Click Here for Valid Link") private WebElement validLinkLocator;
-    @FindBy(linkText = "Click Here for Broken Link") private WebElement brokenLinkLocator;
+    @FindBy(xpath = "//img[@src='/images/Toolsqa.jpg']")
+    private WebElement standardImage;
+    @FindBy(xpath = "//img[@src='/images/Toolsqa_1.jpg']")
+    private WebElement brokenImageElement;
+    @FindBy(linkText = "Click Here for Valid Link")
+    private WebElement validLinkLocator;
+    @FindBy(linkText = "Click Here for Broken Link")
+    private WebElement brokenLinkLocator;
 
     public BrokenLinksPage(WebDriver driver)
     {
