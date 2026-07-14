@@ -10,12 +10,16 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import com.demoqa.utils.ConfigReader;
 
 public class BrowserFactory {
-
     public static WebDriver createDriverInstance(String browser) {
         WebDriver driver;
 
-        // 1. Fetch the headless setting from config.properties dynamically
-        String headlessProp = ConfigReader.getProperty("headless");
+        // 1. Fetch the headless setting from System properties (Maven CLI) first,
+        // then fall back to config.properties if not provided dynamically.
+        String headlessProp = System.getProperty("headless");
+        if (headlessProp == null) {
+            headlessProp = ConfigReader.getProperty("headless");
+        }
+
         boolean isHeadless = headlessProp != null && headlessProp.equalsIgnoreCase("true");
 
         switch (browser.toLowerCase().trim())
@@ -30,7 +34,6 @@ public class BrowserFactory {
                 }
                 driver = new ChromeDriver(chromeOptions);
                 break;
-
             case "edge":
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-allow-origins=*");
@@ -41,7 +44,6 @@ public class BrowserFactory {
                 }
                 driver = new EdgeDriver(edgeOptions);
                 break;
-
             case "firefox":
             case "ff":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -51,11 +53,9 @@ public class BrowserFactory {
                 }
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
-
             default:
                 throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
-
         return driver;
     }
 }
