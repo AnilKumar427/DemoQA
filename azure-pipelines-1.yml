@@ -4,7 +4,7 @@ trigger:
 
 # Use a Microsoft-hosted agent so you don't need a local machine configured
 pool:
-  name: 'Default'
+  vmImage: 'ubuntu-latest'
 
 steps:
 # Step to explicitly ensure Java is available on the hosted agent
