@@ -1,0 +1,28 @@
+# Trigger the pipeline on changes to the main or master branch
+trigger:
+- master  # Change to 'main' if that is your GitHub branch name
+
+# Use a Microsoft-hosted agent so you don't need a local machine configured
+pool:
+  name: 'Default'
+
+steps:
+# Step to explicitly ensure Java is available on the hosted agent
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '11' # Matches your target version; change to 17 or 21 if upgrading
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+
+# Your Maven task executing the project build and tests
+- task: Maven@3
+  displayName: 'Execute Maven Build and Automation Tests'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'clean package' # Added 'clean' to ensure a fresh target directory each run
