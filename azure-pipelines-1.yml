@@ -1,28 +1,22 @@
-# Trigger the pipeline on changes to the main or master branch
 trigger:
-- master  # Change to 'main' if that is your GitHub branch name
+- master  # Change this to 'main' if your GitHub default branch is main
 
-# Use a Microsoft-hosted agent so you don't need a local machine configured
 pool:
   name: 'Default'
 
 steps:
-# Step to explicitly ensure Java is available on the hosted agent
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '11' # Matches your target version; change to 17 or 21 if upgrading
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
-
-# Your Maven task executing the project build and tests
+# We removed JavaToolInstaller and went straight to Maven
 - task: Maven@3
   displayName: 'Execute Maven Build and Automation Tests'
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
+    
+    # CHANGE THESE THREE LINES: Tell Azure to use your local system's JAVA_HOME
+    javaHomeOption: 'path'
+    jdkDirectory: '$(JAVA_HOME)' 
     jdkArchitectureOption: 'x64'
+    
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean package' # Added 'clean' to ensure a fresh target directory each run
+    goals: 'clean package'
